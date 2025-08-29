@@ -7,70 +7,112 @@
     <title>Login</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+        }
+
+        .login-container {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .illustration {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        }
+    </style>
 </head>
 
-<body class="min-h-screen bg-gray-300 text-gray-900">
+<body class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
 
     <section class="max">
-        <!-- <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-                Flowbite
-            </a>
-            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Sign in to your account
-                    </h1>
+
+        <div class="login-container w-full max-w-5xl bg-white rounded-2xl flex flex-col md:flex-row overflow-hidden">
+            <!-- Bagian kiri dengan gambar -->
+            <div class="illustration w-full md:w-1/2 p-10 flex flex-col justify-center items-center text-center">
+                <div class="mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-gray-700 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Sistem Inventaris Barang</h2>
+                <p class="text-gray-600 mb-6">Kelola barang, peminjaman, dan pengembalian dengan mudah dan efisien</p>
+                <div class="grid grid-cols-3 gap-4 mt-8">
+                    <div class="bg-gray-100 p-3 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
+                    </div>
+                    <div class="bg-gray-100 p-3 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </div>
+                    <div class="bg-gray-100 p-3 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bagian kanan dengan form login -->
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800">Masuk ke Akun</h1>
+                    <p class="text-gray-600 mt-2">Silakan masuk untuk mengakses dashboard</p>
+                </div>
+
+                <form action="/login/submit" method="POST" class="space-y-6">
                     @if (session('success'))
                     <div class="alert">{{ session('success') }}</div>
                     @endif
-                    <form class="space-y-4 md:space-y-6" action="/login/submit" method="POST">
-                        @csrf
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
-                        </div>
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
-                        </div>
-                        <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
-                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Don’t have an account yet? <a href="{{ Route('register') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
-                        </p>
-                    </form>
+                    @csrf
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-gray-700 font-medium">Email</span>
+                        </label>
+                        <input type="email" name="email" placeholder="alamat@email.com" class="input input-bordered w-full bg-gray-50" required />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-gray-700 font-medium">Kata Sandi</span>
+                        </label>
+                        <input type="password" name="password" placeholder="********" class="input input-bordered w-full bg-gray-50" required />
+                        <label class="label mt-1">
+                            <a href="#" class="label-text-alt link link-hover text-gray-600">Lupa kata sandi?</a>
+                        </label>
+                    </div>
+
+                    <div class="form-control mt-8">
+                        <button type="submit" class="btn btn-neutral w-full text-white bg-gray-800 hover:bg-gray-900">Masuk</button>
+                    </div>
+                </form>
+
+                <div class="divider my-8">ATAU</div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="btn btn-outline w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 488 512" fill="currentColor">
+                            <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
+                        </svg>
+                        Google
+                    </button>
+                    <button class="btn btn-outline w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 448 512" fill="currentColor">
+                            <path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                        </svg>
+                        Facebook
+                    </button>
                 </div>
-            </div>
-        </div> -->
 
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <div class="card card-side bg-gray-200 text-gray-900 shadow-sm">
-                <figure>
-                    <img
-                        src=""
-                        alt="Movie" />
-                </figure>
-                <div class="card-body">
-                    <form action="/login/submit" method="POST">
-                        @if (session('success'))
-                        <div class="alert">{{ session('success') }}</div>
-                        @endif
-                        @csrf
-                        <label class="label">Email</label>
-                        <input type="email" name="email" class="input" placeholder="Email" />
-
-                        <label class="label">Password</label>
-                        <input type="password" name="password" class="input" placeholder="Password" />
-
-
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-neutral w-full">Log in</button>
-                        </div>
-                    </form>
+                <div class="text-center mt-8">
+                    <p class="text-gray-600">Belum punya akun? <a href="{{ route('register') }}" class="text-gray-800 font-medium hover:underline">Daftar sekarang</a></p>
                 </div>
             </div>
         </div>

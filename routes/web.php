@@ -11,8 +11,8 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [AuthController::class, 'tampil_login'])->name('login');
-Route::get('/register', [AuthController::class, 'tampil_register']);
-Route::post('/register/submit', [AuthController::class, 'submit_register'])->name('register');
+Route::get('/register', [AuthController::class, 'tampil_register'])->name('register');
+Route::post('/register/submit', [AuthController::class, 'submit_register']);
 Route::post('/login/submit', [AuthController::class,'submit_login']);
 
 Route::get('/dashboard', [DashboardController::class, 'tampil_dashboard'])->middleware('auth')->name('dashboard');
