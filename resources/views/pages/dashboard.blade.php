@@ -1,109 +1,179 @@
-@extends ('layout.dashboard')
+@extends('layout.dashboard')
 
 @section('content')
-<div class="max-w mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- <div class="bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-3xl bg-gray  font-semibold text-gray-800">Dashboard</h1>
-        <p class="mt-2 text-gray-600">Welcome {{ Auth::user()->name }} to your dashboard! 👋</p>
-    </div> -->
-
-    <div class="mt-5 flex flex-wrap justify-center items-center gap-4">
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Card 1: Pengelolaan Barang -->
-            <a href="{{ route('kelolabarang.index') }}" class="card cursor-pointer hover:shadow-lg hover:bg-gray-50 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div class="text-gray-700 h-12 w-12 items-center mb-3 bg-gray-100 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                    </svg>
-                </div>
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-gray-500 font-semibold text-sm uppercase tracking-wide">Pengelolaan Barang</h2>
-                </div>
-                <div class="flex justify-between">
-                    <p class="text-3xl font-bold text-gray-800">3,782</p>
-                    <span class="text-green-600 font-medium text-sm flex items-center group">
-                        Lihat Detail
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 2: Peminjaman Barang -->
-            <a class="card cursor-pointer hover:shadow-lg hover:bg-gray-50 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div class="text-gray-700 bg-gray-100 p-2 w-12 h-12 mb-3 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                </div>
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-gray-500 font-semibold text-sm uppercase tracking-wide">Peminjaman Barang</h2>
-                </div>
-                <div class="flex justify-between">
-                    <p class="text-3xl font-bold text-gray-800">2,149</p>
-                    <span class="text-green-600 font-medium text-sm flex items-center group">
-                        Lihat Detail
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 3: Pengembalian Barang -->
-            <a class="card cursor-pointer hover:shadow-lg hover:bg-gray-50 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div class="text-gray-700 bg-gray-100 w-12 h-12 mb-3 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                </div>
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-gray-500 font-semibold text-sm uppercase tracking-wide">Pengembalian Barang</h2>
-                </div>
-                <div class="flex justify-between">
-                    <p class="text-3xl font-bold text-gray-800">1,857</p>
-                    <span class="text-green-600 font-medium text-sm flex items-center group">
-                        Lihat Detail
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 4: Laporan -->
-            <a class="card hover:shadow-lg hover:bg-gray-50 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div class="text-gray-700 bg-gray-100 h-12 w-12 mb-3 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                </div>
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-gray-500 font-semibold text-sm uppercase tracking-wide">Laporan</h2>
-                </div>
-                <div class="flex justify-between">
-                    <p class="text-3xl font-bold text-gray-800">5,359</p>
-                    <span class="text-green-600 font-medium text-sm flex items-center group">
-                        Lihat Detail
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                </div>
-            </a>
 
 
-
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8">
+    <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 class="text-4xl font-bold text-black mb-1">Welcome To Dashboard {{ Auth::user()->name }}👋</h1>
+            <p class="text-gray-500">manage your storage more efficiently now</p>
         </div>
+        <div class="flex gap-3">
+            <a href="{{ route('kelolabarang.index') }}" class="bg-black text-white px-6 py-2 rounded-full font-semibold shadow hover:opacity-80 transition">+ Add Items</a>
+            <a href="#" class="border border-black text-black px-6 py-2 rounded-full font-semibold bg-transparent hover:bg-black/10 transition">Import Data</a>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <!-- Card 1 -->
+        <a href="{{ route('kelolabarang.index') }}" class="bg-black text-white rounded-2xl shadow p-8 relative overflow-hidden">
+            <div class="absolute top-4 right-4">
+                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </div>
+            <h2 class="uppercase text-sm font-medium mb-2 opacity-80">Total Items</h2>
+            <div class="text-5xl font-bold mb-2">{{ $jumlah_barang }}</div>
+            <span class="text-green-400 font-semibold text-xs">5↑ Increased from last month</span>
+        </a>
+        <!-- Card 2 -->
+        <a href="{{ route('peminjaman.index') }}" class="bg-white text-black rounded-2xl shadow p-8 relative overflow-hidden">
+            <div class="absolute top-4 right-4">
+                <svg class="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </div>
+            <h2 class="uppercase text-sm font-medium mb-2 opacity-80">total loans</h2>
+            <div class="text-5xl font-bold mb-2">{{ $jumlah_peminjaman }}</div>
+            <span class="text-green-400 font-semibold text-xs">6↑ Increased from last month</span>
+        </a>
+        <!-- Card 3 -->
+        <div class="bg-white text-black rounded-2xl shadow p-8 relative overflow-hidden">
+            <div class="absolute top-4 right-4">
+                <svg class="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </div>
+            <h2 class="uppercase text-sm font-medium mb-2 opacity-80">total return</h2>
+            <div class="text-5xl font-bold mb-2">12</div>
+            <span class="text-green-400 font-semibold text-xs">2↑ Increased from last month</span>
+        </div>
+        <!-- Card 4 -->
+        <div class="bg-white text-black rounded-2xl shadow p-8 relative overflow-hidden">
+            <div class="absolute top-4 right-4">
+                <svg class="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </div>
+            <h2 class="uppercase text-sm font-medium mb-2 opacity-80">total report</h2>
+            <div class="text-5xl font-bold mb-2">2</div>
+            <span class="text-gray-400 font-semibold text-xs">On Discuss</span>
+        </div>
+    </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Project Analytics -->
+        <div class="col-span-2 bg-white rounded-2xl p-8 shadow flex flex-col">
+            <h3 class="font-semibold text-lg mb-6 text-black">Borrowed Analytics</h3>
+            <div id="chart"></div>
+        </div>
+        <!-- Reminders & Project List -->
+        <div class="flex flex-col gap-6">
+            <div class="bg-white rounded-2xl p-8 shadow">
+                <h3 class="font-semibold text-lg mb-3 text-black">Reminders Report</h3>
+                <div class="mb-2 text-black font-medium">Report From Borrowed</div>
+                <div class="mb-4 text-sm text-gray-500">Time : 02:00pm - 04:00pm</div>
+                <button class="bg-black text-white px-4 py-2 rounded-full font-semibold shadow hover:opacity-80 transition">Check Report</button>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold text-lg text-black">Items</h3>
+                    <a href="{{ route('kelolabarang.index') }}" class="border border-black text-black rounded-full px-4 py-1 text-sm">+ New</a>
+                </div>
+                <ul class="space-y-3 text-sm">
+                    @foreach($items->sortByDesc('created_at')->take(5) as $item)
+                        <li class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-600 rounded-full"></span>
+                            <span class="font-medium text-black">{{ $item->name }}</span>
+                            <span class="ml-auto text-xs text-gray-400">Added: {{ $item->created_at->format('M d, Y') }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
-
-
 @endsection
+
+
+@push('scripts')
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    var labels = {!! json_encode($labels) !!};
+    var totals = {!! json_encode($totals) !!};
+
+    var options = {
+        chart: {
+            type: 'bar',
+            height: 350,
+            toolbar: { show: false }
+        },
+        series: [{
+            name: 'Total Peminjaman',
+            data: totals
+        }],
+        xaxis: {
+            categories: labels,
+            labels: {
+                rotate: 0,
+                style: {
+                    colors: '#374151',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                }
+            }
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: '#374151',
+                    fontSize: '13px',
+                }
+            }
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 8,
+                columnWidth: '45%',
+                distributed: true // tiap bar bisa warna beda
+            }
+        },
+        colors: ['#106313', '#09750d'], // dipakai bergantian ke setiap bar
+        fill: {
+            type: 'pattern',
+            pattern: {
+                style: ['slantedLines'], // garis miring
+                width: 6,
+                height: 6,
+                strokeWidth: 2
+            }
+        },
+        grid: {
+            borderColor: '#E5E7EB',
+            strokeDashArray: 4,
+        },
+        dataLabels: {
+            enabled: true,
+            style: {
+                fontSize: '13px',
+                colors: ['#111827'],
+            }
+        },
+        tooltip: {
+            theme: 'light',
+            y: {
+                formatter: function(val) {
+                    return val + "x dipinjam";
+                }
+            }
+        },
+        legend: { show: false }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+});
+</script>
+@endpush
