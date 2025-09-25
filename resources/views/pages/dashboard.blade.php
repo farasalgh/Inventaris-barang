@@ -117,12 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
         xaxis: {
             categories: labels,
             labels: {
-                rotate: 0,
-                style: {
-                    colors: '#374151',
-                    fontSize: '14px',
-                    fontWeight: 500,
-                }
+                show: false,
             }
         },
         yaxis: {

@@ -40,21 +40,7 @@
         </ul>
     </div>
 
-    @if (session('succes'))
-    <div role="alert" id="alert" class="alert mt-2 alert-success">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>{{ session('succes') }}</span>
-    </div>
-    @elseif (session('error'))
-    <div role="alert" class="alert alert-error">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>{{ session('error') }}</span>
-    </div>
-    @endif
+    <x-modal-alert />
 
     <div class="bg-gradient-to-r z-10 mb-4 w-full relative mt-4 from-gray-700 to-gray-900 rounded-xl shadow-lg px-6 py-4 flex items-center justify-between">
 
@@ -132,7 +118,7 @@
                         <span class="badge badge-ghost badge-sm">{{ $barang->qty }}</span>
                     </td>
                     <td>{{ $barang->type }}</td>
-                    <th>
+                    <td class="flex gap-2">
                         <a href="/mengelola-barang/edit/{{ $barang->id }}" class="btn btn-neutral">Edit</a>
                         <form action="{{ route('barang.destroy', $barang->id) }}" method="POST" class="inline">
                             @csrf @method('DELETE')
@@ -140,7 +126,7 @@
                                 Delete
                             </button>
                         </form>
-                    </th>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

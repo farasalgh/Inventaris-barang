@@ -45,7 +45,7 @@ class BarangController extends Controller
         }
         Barang::create($data);
 
-        return redirect()->route('kelolabarang.index')->with('succes', 'Barang berhasil ditambahkan');
+        return redirect()->route('kelolabarang.index')->with('success', 'Barang berhasil ditambahkan');
     }
 
     /**
@@ -90,7 +90,7 @@ class BarangController extends Controller
         }
         $barang->update();
 
-        return redirect()->route('kelolabarang.index')->with('succes', 'Barang berhasil diperbarui');
+        return redirect()->route('kelolabarang.index')->with('success', 'Barang berhasil diperbarui');
     }
     
 
@@ -101,6 +101,6 @@ class BarangController extends Controller
     {
         //
         $barang->delete();
-        return redirect()->route('kelolabarang.index')->with('succes', 'Barang berhasil dihapus');
+        return redirect()->route('kelolabarang.index')->with('success', 'Barang berhasil dihapus');
     }
 }

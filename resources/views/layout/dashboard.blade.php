@@ -156,19 +156,19 @@
                 <!-- Menu Navigasi -->
                 <ul class="space-y-2">
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
+                        <a href="{{ route('dashboard') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
                             <i class="fas fa-tachometer-alt w-5 text-center mr-3 text-gray-500 group-hover:text-gray-700"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
+                        <a href="{{ route('kelolabarang.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
                             <i class="fas fa-boxes w-5 text-center mr-3 text-gray-500 group-hover:text-gray-700"></i>
                             <span>Pengelola Barang</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
+                        <a href="{{ route('peminjaman.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
                             <i class="fas fa-hand-holding w-5 text-center mr-3 text-gray-500 group-hover:text-gray-700"></i>
                             <span>Peminjaman</span>
                         </a>

@@ -40,21 +40,7 @@
         </ul>
     </div>
 
-    @if (session('success'))
-    <div role="alert" id="alert" class="alert mt-2 alert-success">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>{{ session('success') }}</span>
-    </div>
-    @elseif (session('error'))
-    <div role="alert" class="alert alert-error">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>{{ session('error') }}</span>
-    </div>
-    @endif
+    <x-modal-alert />
 
     <div class="bg-gradient-to-r mb-4 z-10 w-full relative mt-4 from-gray-700 to-gray-900 rounded-xl shadow-lg px-6 py-4 flex items-center justify-between">
 
@@ -97,7 +83,7 @@
                     <th>Keperluan</th>
                     <th>Telepon</th>
                     <th>Alamat</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -120,7 +106,7 @@
                     <td>{{ $peminjam->keperluan }}</td>
                     <td>{{ $peminjam->telepon }}</td>
                     <td>{{ $peminjam->alamat }}</td>
-                    <th>
+                    <th class="flex gap-2">
                         <a href="/peminjaman-barang/edit/{{ $peminjam->id }}" class="btn btn-neutral">Edit</a>
                         <form action="/peminjaman-barang/destroy/{{ $peminjam->id }}" method="POST" class="inline">
                             @csrf
