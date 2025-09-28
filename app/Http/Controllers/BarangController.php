@@ -10,10 +10,17 @@ class BarangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $barangs = Barang::paginate(10);
-        return view('kelolabarang.index', compact('barangs')); 
+        $search = $request->input('search');
+
+        $barangs = Barang::when($search, function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('type', 'like', "%{$search}%");
+        })
+            ->paginate(10);
+
+        return view('kelolabarang.index', compact('barangs', 'search'));
     }
 
     /**
@@ -39,7 +46,7 @@ class BarangController extends Controller
 
         $data = $request->only(['name', 'qty', 'type']);
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $data['image'] = $imagePath;
         }
@@ -59,7 +66,7 @@ class BarangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id) 
+    public function edit($id)
     {
         //
         $barang = Barang::find($id);
@@ -72,7 +79,7 @@ class BarangController extends Controller
     public function update(Request $request, $id)
     {
         //
-       $barang = Barang::find($id);
+        $barang = Barang::find($id);
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -84,7 +91,7 @@ class BarangController extends Controller
         $barang->name = $request->name;
         $barang->qty = $request->qty;
         $barang->type = $request->type;
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $barang->image = $imagePath;
         }
@@ -92,12 +99,12 @@ class BarangController extends Controller
 
         return redirect()->route('kelolabarang.index')->with('success', 'Barang berhasil diperbarui');
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( Barang $barang)
+    public function destroy(Barang $barang)
     {
         //
         $barang->delete();

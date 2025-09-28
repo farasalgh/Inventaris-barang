@@ -42,22 +42,30 @@
 
     <x-modal-alert />
 
-    <div class="bg-gradient-to-r z-10 mb-4 w-full relative mt-4 from-gray-700 to-gray-900 rounded-xl shadow-lg px-6 py-4 flex items-center justify-between">
+    <div class="bg-gradient-to-r mb-4 z-10 h-30 w-full relative mt-4 from-gray-700 to-gray-900 
+            rounded-xl shadow-lg px-6 py-4 flex items-center justify-between">
 
 
-        <div class="ml-3 w-full max-w-sm min-w-[200px] relative">
-            <div class="join">
-                <input
-                    class="input join-item bg-white/10 backdrop-blur-md border border-white/20 text-white  placeholder-gray-300 "
-                    placeholder="Search" />
-                <button class="btn join-item bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition">
-                    <i class="bi bi-search"></i>
-                    <span class="ml-1">Search</span>
-                </button>
-            </div>
+        <div class="ml-3 w-full max-w-sm min-w-[200px]">
+            <form method="GET" action="{{ route('kelolabarang.index') }}" class="w-full">
+                <div class="join w-full">
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ $search ?? '' }}"
+                        placeholder="Search"
+                        class="input join-item w-full bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-300" />
+                    <button type="submit"
+                        class="btn join-item bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition">
+                        <i class="bi bi-search"></i>
+                        <span class="ml-1">Search</span>
+                    </button>
+                </div>
+            </form>
         </div>
 
-        <div class="flex justify-center m-5">
+
+        <div class="flex items-center ml-5">
             <button onclick="my_modal_create.showModal()"
                 class="btn bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition"
                 type="button">
@@ -194,33 +202,5 @@
     <a href="{{ route('dashboard') }}" class="mt-4 btn"><i class="bi bi-back"></i>Back to page</a>
 
 </div>
-
-
-
-
-<style>
-    .fade-out {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const alertSuccess = document.getElementById('alert');
-        if (alertSuccess) {
-            // Tunda penghapusan elemen setelah 3 detik
-            setTimeout(() => {
-                // Tambahkan kelas fade-out untuk memicu transisi
-                alertSuccess.classList.add('fade-out');
-
-                // Hapus elemen sepenuhnya setelah transisi selesai (misalnya, setelah 0.5 detik)
-                setTimeout(() => {
-                    alertSuccess.style.display = 'none';
-                }, 500); // Sesuaikan dengan durasi transisi di CSS Anda
-            }, 3000); // Durasi sebelum efek fade out dimulai
-        }
-    });
-</script>
 
 @endsection

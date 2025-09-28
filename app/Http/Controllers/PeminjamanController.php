@@ -4,18 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Peminjaman;
+use App\Models\Pengembalian;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
         $barangs = Barang::all();
-        $peminjamans = Peminjaman::paginate(15);
 
-        return view('peminjam.index', compact('barangs', 'peminjamans'));
+        $peminjamans = Peminjaman::with('barang')
+            ->when($search, function ($query, $search) {
+                $query->where('nama_peminjam', 'like', "%{$search}%")
+                    ->orWhereHas('barang', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
+            })
+            ->paginate(15);
+
+        return view('peminjam.index', compact('peminjamans', 'search', 'barangs'));
     }
+
 
     public function buat_peminjaman(Request $request)
     {
@@ -32,6 +43,12 @@ class PeminjamanController extends Controller
         $data = $request->only(['id_barang', 'nama_peminjam', 'tanggal_kembali', 'keperluan', 'telepon', 'alamat']);
 
         Peminjaman::create($data);
+
+        // Kurangi stock barang
+        $barang = Barang::find($request->input('id_barang'));
+        if ($barang && $barang->qty > 0) {
+            $barang->decrement('qty');
+        }
 
         return redirect()->route('peminjaman.index')->with('success', 'Peminjaman berhasil dibuat');
     }

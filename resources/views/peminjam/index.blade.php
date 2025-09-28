@@ -42,22 +42,30 @@
 
     <x-modal-alert />
 
-    <div class="bg-gradient-to-r mb-4 z-10 w-full relative mt-4 from-gray-700 to-gray-900 rounded-xl shadow-lg px-6 py-4 flex items-center justify-between">
+    <div class="bg-gradient-to-r mb-4 z-10 h-30 w-full relative mt-4 from-gray-700 to-gray-900 
+            rounded-xl shadow-lg px-6 py-4 flex items-center justify-between">
 
-
-        <div class="ml-3 w-full max-w-sm min-w-[200px] relative">
-            <div class="join">
-                <input
-                    class="input join-item bg-white/10 backdrop-blur-md border border-white/20 text-white  placeholder-gray-300 "
-                    placeholder="Search" />
-                <button class="btn join-item bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition">
-                    <i class="bi bi-search"></i>
-                    <span class="ml-1">Search</span>
-                </button>
-            </div>
+        
+        <div class="ml-3 w-full max-w-sm min-w-[200px]">
+            <form method="GET" action="{{ route('peminjaman.index') }}" class="w-full">
+                <div class="join w-full">
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ $search ?? '' }}"
+                        placeholder="Search"
+                        class="input join-item w-full bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-300" />
+                    <button type="submit"
+                        class="btn join-item bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition">
+                        <i class="bi bi-search"></i>
+                        <span class="ml-1">Search</span>
+                    </button>
+                </div>
+            </form>
         </div>
 
-        <div class="flex justify-center m-5">
+       
+        <div class="flex items-center ml-5">
             <button onclick="my_modal_create.showModal()"
                 class="btn bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition"
                 type="button">
@@ -66,6 +74,7 @@
             </button>
         </div>
     </div>
+
 
     <div class="overflow-x-auto bg-white shadow-lg p-4 rounded-lg mb-4">
         <table class="table">
@@ -108,10 +117,16 @@
                     <td>{{ $peminjam->alamat }}</td>
                     <th class="flex gap-2">
                         <a href="/peminjaman-barang/edit/{{ $peminjam->id }}" class="btn btn-neutral">Edit</a>
-                        <form action="/peminjaman-barang/destroy/{{ $peminjam->id }}" method="POST" class="inline">
+                        <!-- <form action="/peminjaman-barang/destroy/{{ $peminjam->id }}" method="POST" class="inline">
                             @csrf
-                             <button class="btn bg-red-600 hover:bg-red-700 text-white border-0">
+                            <button class="btn bg-red-600 hover:bg-red-700 text-white border-0">
                                 Delete
+                            </button>
+                        </form> -->
+                        <form action="{{ route('peminjaman.kembalikan', $peminjam->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-warning">
+                                Kembalikan
                             </button>
                         </form>
                     </th>

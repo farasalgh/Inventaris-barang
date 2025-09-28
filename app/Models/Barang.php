@@ -13,4 +13,9 @@ class Barang extends Model
     {
         return $this->hasMany(Peminjaman::class, 'id_barang');
     }
+
+    public function pengembalian()
+    {
+        return $this->hasMany(Pengembalian::class, 'id_barang');
+    }
 }

@@ -48,13 +48,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
+                    <a href="{{ route('pengembalian.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
                         <i class="fas fa-undo-alt w-5 text-center mr-3 text-gray-500 group-hover:text-gray-700"></i>
                         <span>Return Items</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
+                    <a href="{{ route('laporan.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
                         <i class="fas fa-chart-bar w-5 text-center mr-3 text-gray-500 group-hover:text-gray-700"></i>
                         <span>Report</span>
                     </a>
@@ -174,7 +174,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
+                        <a href="{{ route('pengembalian.index') }}" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-300 group">
                             <i class="fas fa-undo-alt w-5 text-center mr-3 text-gray-500 group-hover:text-gray-700"></i>
                             <span>Pengembalian</span>
                         </a>

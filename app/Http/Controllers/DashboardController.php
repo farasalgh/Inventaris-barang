@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Laporan;
 use App\Models\Peminjaman;
+use App\Models\Pengembalian;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +32,9 @@ class DashboardController extends Controller
 
         $jumlah_barang = Barang::count();
         $jumlah_peminjaman = Peminjaman::count();
+        $jumlah_pengembalian = Pengembalian::count();
+        $jumlah_laporan = Laporan::count();
+        $laporanTerbaru = Laporan::latest()->first();
         $items = Barang::get();
 
 
@@ -38,7 +43,10 @@ class DashboardController extends Controller
             'jumlah_peminjaman', 
             'labels', 
             'totals',
-            'items'
+            'items',
+            'jumlah_pengembalian',
+            'jumlah_laporan',
+            'laporanTerbaru'
         ));
     }
 }

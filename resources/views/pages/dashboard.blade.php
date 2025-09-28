@@ -38,27 +38,27 @@
             <span class="text-green-400 font-semibold text-xs">6↑ Increased from last month</span>
         </a>
         <!-- Card 3 -->
-        <div class="bg-white text-black rounded-2xl shadow p-8 relative overflow-hidden">
+        <a href="{{ route('pengembalian.index') }}" class="bg-white text-black rounded-2xl shadow p-8 relative overflow-hidden">
             <div class="absolute top-4 right-4">
                 <svg class="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
             </div>
             <h2 class="uppercase text-sm font-medium mb-2 opacity-80">total return</h2>
-            <div class="text-5xl font-bold mb-2">12</div>
+            <div class="text-5xl font-bold mb-2">{{ $jumlah_pengembalian }}</div>
             <span class="text-green-400 font-semibold text-xs">2↑ Increased from last month</span>
-        </div>
+        </a>
         <!-- Card 4 -->
-        <div class="bg-white text-black rounded-2xl shadow p-8 relative overflow-hidden">
+        <a href="{{ route('laporan.index') }}" class="bg-white text-black rounded-2xl shadow p-8 relative overflow-hidden">
             <div class="absolute top-4 right-4">
                 <svg class="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
             </div>
             <h2 class="uppercase text-sm font-medium mb-2 opacity-80">total report</h2>
-            <div class="text-5xl font-bold mb-2">2</div>
+            <div class="text-5xl font-bold mb-2">{{ $jumlah_laporan }}</div>
             <span class="text-gray-400 font-semibold text-xs">On Discuss</span>
-        </div>
+        </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -67,14 +67,30 @@
             <h3 class="font-semibold text-lg mb-6 text-black">Borrowed Analytics</h3>
             <div id="chart"></div>
         </div>
+
+
         <!-- Reminders & Project List -->
         <div class="flex flex-col gap-6">
-            <div class="bg-white rounded-2xl p-8 shadow">
-                <h3 class="font-semibold text-lg mb-3 text-black">Reminders Report</h3>
-                <div class="mb-2 text-black font-medium">Report From Borrowed</div>
-                <div class="mb-4 text-sm text-gray-500">Time : 02:00pm - 04:00pm</div>
-                <button class="bg-black text-white px-4 py-2 rounded-full font-semibold shadow hover:opacity-80 transition">Check Report</button>
+            @if ($laporanTerbaru)
+            <div class="bg-white rounded-2xl p-8 shadow mb-6">
+                <h3 class="font-semibold text-lg mb-3 text-black">{{ $laporanTerbaru->nama_laporan }}</h3>
+                <div class="mb-2 text-black font-medium">Laporan Pengembalian Barang</div>
+                <div class="mb-4 text-sm text-gray-500">
+                    Periode :
+                    {{ \Carbon\Carbon::parse($laporanTerbaru->periode_mulai)->format('d M Y') }}
+                    -
+                    {{ \Carbon\Carbon::parse($laporanTerbaru->periode_selesai)->format('d M Y') }}
+                </div>
+                <a href="{{ route('laporan.cetak', $laporanTerbaru->id) }}" target="_blank"
+                    class="bg-black text-white px-4 py-2 rounded-full font-semibold shadow hover:opacity-80 transition">
+                    Check Report
+                </a>
             </div>
+            @else
+            <div class="bg-white rounded-2xl p-8 shadow mb-6 text-center text-gray-500">
+                Belum ada laporan yang tersedia
+            </div>
+            @endif
             <div class="bg-white rounded-2xl p-8 shadow">
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="font-semibold text-lg text-black">Items</h3>
@@ -82,11 +98,11 @@
                 </div>
                 <ul class="space-y-3 text-sm">
                     @foreach($items->sortByDesc('created_at')->take(5) as $item)
-                        <li class="flex items-center gap-2">
-                            <span class="w-2 h-2 bg-green-600 rounded-full"></span>
-                            <span class="font-medium text-black">{{ $item->name }}</span>
-                            <span class="ml-auto text-xs text-gray-400">Added: {{ $item->created_at->format('M d, Y') }}</span>
-                        </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-600 rounded-full"></span>
+                        <span class="font-medium text-black">{{ $item->name }}</span>
+                        <span class="ml-auto text-xs text-gray-400">Added: {{ $item->created_at->format('M d, Y') }}</span>
+                    </li>
                     @endforeach
                 </ul>
             </div>
@@ -99,76 +115,81 @@
 @push('scripts')
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
 
-    var labels = {!! json_encode($labels) !!};
-    var totals = {!! json_encode($totals) !!};
+        var labels = {!! json_encode($labels) !!};
+        var totals = {!! json_encode($totals) !!};
 
-    var options = {
-        chart: {
-            type: 'bar',
-            height: 350,
-            toolbar: { show: false }
-        },
-        series: [{
-            name: 'Total Peminjaman',
-            data: totals
-        }],
-        xaxis: {
-            categories: labels,
-            labels: {
-                show: false,
-            }
-        },
-        yaxis: {
-            labels: {
+
+        var options = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            series: [{
+                name: 'Total Peminjaman',
+                data: totals
+            }],
+            xaxis: {
+                categories: labels,
+                labels: {
+                    show: false,
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: '#374151',
+                        fontSize: '13px',
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 8,
+                    columnWidth: '45%',
+                    distributed: true // tiap bar bisa warna beda
+                }
+            },
+            colors: ['#106313', '#09750d'], // dipakai bergantian ke setiap bar
+            fill: {
+                type: 'pattern',
+                pattern: {
+                    style: ['slantedLines'], // garis miring
+                    width: 6,
+                    height: 6,
+                    strokeWidth: 2
+                }
+            },
+            grid: {
+                borderColor: '#E5E7EB',
+                strokeDashArray: 4,
+            },
+            dataLabels: {
+                enabled: true,
                 style: {
-                    colors: '#374151',
                     fontSize: '13px',
+                    colors: ['#111827'],
                 }
-            }
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 8,
-                columnWidth: '45%',
-                distributed: true // tiap bar bisa warna beda
-            }
-        },
-        colors: ['#106313', '#09750d'], // dipakai bergantian ke setiap bar
-        fill: {
-            type: 'pattern',
-            pattern: {
-                style: ['slantedLines'], // garis miring
-                width: 6,
-                height: 6,
-                strokeWidth: 2
-            }
-        },
-        grid: {
-            borderColor: '#E5E7EB',
-            strokeDashArray: 4,
-        },
-        dataLabels: {
-            enabled: true,
-            style: {
-                fontSize: '13px',
-                colors: ['#111827'],
-            }
-        },
-        tooltip: {
-            theme: 'light',
-            y: {
-                formatter: function(val) {
-                    return val + "x dipinjam";
+            },
+            tooltip: {
+                theme: 'light',
+                y: {
+                    formatter: function(val) {
+                        return val + "x dipinjam";
+                    }
                 }
+            },
+            legend: {
+                show: false
             }
-        },
-        legend: { show: false }
-    };
+        };
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-});
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    });
 </script>
 @endpush
