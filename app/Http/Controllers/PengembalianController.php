@@ -73,7 +73,7 @@ class PengembalianController extends Controller
         // Update stock barang
         $barang = Barang::find($peminjaman->id_barang);
         if ($barang) {
-            $barang->qty += 1; // Asumsikan setiap peminjaman mengurangi stock sebanyak 1
+            $barang->qty += 1;
             $barang->save();
         }
 

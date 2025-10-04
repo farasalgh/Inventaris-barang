@@ -117,8 +117,8 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        var labels = {!! json_encode($labels) !!};
-        var totals = {!! json_encode($totals) !!};
+        var labels = @json($labels); 
+        var totals = @json($totals);
 
 
         var options = {

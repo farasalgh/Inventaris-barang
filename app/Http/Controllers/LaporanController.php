@@ -15,7 +15,7 @@ class LaporanController extends Controller
         $bulan = $request->input('bulan');
 
         // ambil semua bulan yang tersedia dan ubah ke Carbon
-        $bulanTersedia = Pengembalian::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as bulan')
+        $bulanTersedia = Pengembalian::selectRaw('DATE_FORMAT(tanggal_dikembalikan, "%Y-%m") as bulan')
             ->distinct()
             ->orderBy('bulan', 'desc')
             ->pluck('bulan')
@@ -30,7 +30,7 @@ class LaporanController extends Controller
                 $query->whereBetween('periode_mulai', [$periode_mulai, $periode_selesai]);
             })
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view('laporan.index', compact('laporans', 'bulanTersedia', 'bulan'));
     }

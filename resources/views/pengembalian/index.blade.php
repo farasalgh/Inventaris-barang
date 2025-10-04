@@ -89,7 +89,7 @@
                     <th>User</th>
                     <th>Tanggal Pinjam</th>
                     <th>Tanggal Kembali</th>
-                    <th>Dikembaliakn</th>
+                    <th>Dikembalikan</th>
                     <th>status</th>
                     <th>Alamat</th>
                 </tr>
@@ -97,30 +97,19 @@
             <tbody>
                 @foreach ($pengembalians as $no => $pengembali)
                 <tr>
-                    <!-- Nomor urut -->
                     <th>
                         <div class="badge badge-ghost badge-md">{{ $no + 1 }}</div>
                     </th>
-
-                    <!-- Nama Barang -->
                     <td>{{ $pengembali->barang->name ?? 'Barang tidak ditemukan' }}</td>
-
-                    <!-- Nama Peminjam -->
                     <td>
                         <div class="font-bold">{{ $pengembali->nama_peminjam }}</div>
                     </td>
-
-                    <!-- Tanggal Pinjam -->
                     <td>
                         <span class="badge badge-ghost badge-sm">
                             {{ $pengembali->tanggal_pinjam }}
                         </span>
                     </td>
-
-                    <!-- Tanggal Kembali (Rencana) -->
                     <td>{{ $pengembali->tanggal_kembali }}</td>
-
-                    <!-- Tanggal Dikembalikan -->
                     <td>{{ $pengembali->tanggal_dikembalikan }}</td>
 
                     <!-- Status -->

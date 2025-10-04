@@ -126,7 +126,7 @@
                         <form action="{{ route('peminjaman.kembalikan', $peminjam->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-warning">
-                                Kembalikan
+                                return
                             </button>
                         </form>
                     </th>
