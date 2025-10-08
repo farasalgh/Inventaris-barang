@@ -27,7 +27,7 @@
     </style>
 </head>
 
-<body class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+<body class="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
 
     <section class="max">
 
@@ -116,9 +116,8 @@
                 </div>
             </div>
         </div>
+
     </section>
-
-
 </body>
 
 </html>
