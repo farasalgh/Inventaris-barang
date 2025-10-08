@@ -51,7 +51,7 @@
                 </p>
                 <a href="{{ route('login') }}" class="btn btn-neutral">Get Features </a>
             </div>
-        </div>
+        </div>  
     </div>
 </section>
 
